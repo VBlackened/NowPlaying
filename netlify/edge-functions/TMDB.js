@@ -1,6 +1,6 @@
 ﻿export default async (request, context) => {
-    const API_KEY = process.env.API_KEY;
-    const API_URL = process.env.API_URL;
+    const API_KEY = Netlify.env.API_KEY;
+    const API_URL = Netlify.env.API_URL;
 
     if (!API_KEY || !API_URL) {
         return new Response("Missing API_KEY or API_URL", { status: 500 });
