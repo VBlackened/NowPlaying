@@ -1,0 +1,57 @@
+﻿@inject FavoritesService FavoritesService
+
+<div class="movieCard card h-100">
+    <img src="@Movie.PosterPath" alt="Movie Poster" class="card-img-top" />
+    <div class="card-body border-top">
+        <div class="card-title fw-bold lh-1">
+            @Movie.Title
+        </div>
+        <div class="card-text lh-1 fst-italic">
+            @{
+                var parsed = DateTime.TryParse(Movie.ReleaseDate, out var releaseDate);
+            }
+            Release Date: @(parsed ? releaseDate.ToString("MMMM dd, yyyy") : "Unknown")
+        </div>
+    </div>
+    <div class="movieCardFooter card-footer d-flex justify-content-between">
+        <button class="btn btn-outline-primary" @onclick="HandleToggleFavorite">
+            @(isFavorite ? "Remove Fav" : "Add Fav")
+        </button>
+        <a href="/movie/@Movie.Id" class="btn btn-primary">More Info</a>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public Movie? Movie { get; set; }
+    [Parameter] public EventCallback OnChange { get; set; }
+    bool isFavorite;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Movie is not null)
+        {
+            isFavorite = await FavoritesService.IsFavorite(Movie.Id);
+        }
+    }
+
+    private async Task HandleToggleFavorite()
+    {
+        if (Movie is null)
+        {
+            return;
+        }
+
+        if (isFavorite)
+        {
+            await FavoritesService.RemoveFavorite(Movie);
+            isFavorite = false;
+        }
+        else
+        {
+            await FavoritesService.AddFavorite(Movie);
+            isFavorite = true;
+        }
+
+        await OnChange.InvokeAsync();
+    }
+}

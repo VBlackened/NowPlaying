@@ -1,0 +1,20 @@
+.navStyle {
+    background-color: var(--bc-theme-850);
+}
+
+.nav-item {
+    --bd-navbar-hover-color: var(--bc-theme-400);
+    --bs-nav-link-hover-color: var(--bc-theme-400);
+}
+
+.dropdown-menu {
+    background-color: var(--bc-theme-900);
+}
+
+.dropdown:has(.nav-link.active) .dropdown-toggle{
+    color: var(--bs-navbar-active-color);
+}
+
+::deep form .from-control {
+    background-color: var(--bc-theme-600);
+}

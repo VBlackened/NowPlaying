@@ -1,0 +1,68 @@
+﻿@inject NavigationManager Nav
+
+<nav class="navbar navbar-expand-lg navStyle" data-bs-theme="dark">
+    <div class="container-xxl">
+        <a href="/" class="me-3">
+            <img src="/images/popcorn_logo.svg" height="40" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent"
+                aria-expanded="false" aria-label="Toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Menu Links-->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                        <i class="bi bi-house"></i>
+                        <span>Home</span>
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/now-playing">
+                        <i class="bi bi-film"></i>
+                        <span>Now Playing</span>
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/popular">
+                        <i class="bi bi-stars"></i>
+                        <span>Popular</span>
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/favorites">
+                        <i class="bi bi-heart"></i>
+                        <span>Favorites</span>
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/themes">
+                        <i class="bi bi-palette"></i>
+                        <span>Themes</span>
+                    </NavLink>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <InputText 
+                    class="form-control form-control-sm me-2" 
+                    type="search" 
+                    placeholder="Search Movies..." 
+                    aria-label="Search" 
+                    name="query"
+                    @bind-Value="Query"/>
+                <button class="btn btn-sm btn-primary" type="button" @onclick="HandleSearch">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+@code {
+    private string Query = string.Empty;
+
+    private void HandleSearch()
+    {
+        //take the value from the form and pass it to the search page
+        Nav.NavigateTo(string.IsNullOrEmpty(Query) ? "search" : $"search?query={Query}");
+    }
+}

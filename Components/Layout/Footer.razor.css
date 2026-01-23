@@ -1,0 +1,16 @@
+.footerStyle {
+    background-color: var(--bc-theme-900);
+}
+
+.footerStyle a{
+    color: var(--bc-theme-200);
+}
+
+.footerStyle a:hover{
+    color: var(--bc-theme-core);
+}
+
+.bi{
+    font-size: 1.5rem;
+    padding-inline-start: .5rem;
+}
