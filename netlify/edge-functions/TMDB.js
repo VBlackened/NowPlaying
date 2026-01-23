@@ -1,8 +1,8 @@
 ﻿export default async (request, context) => {
     console.log("Edge function called:", request.url);
 
-    const API_KEY = context.env.get('API_KEY');
-    const API_URL = context.env.get('API_URL');
+    const API_KEY = Deno.env.get('API_KEY');
+    const API_URL = Deno.env.get('API_URL');
 
     console.log("API_URL:", API_URL);
     console.log("Has API_KEY:", !!API_KEY);
