@@ -1,8 +1,3 @@
-﻿[[edge_functions]]
-  function = "TMDB"
+[[edge_functions]]
+  function = "tmdb-proxy"
   path = "/TMDB/*"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
