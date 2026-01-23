@@ -16,9 +16,4 @@ chmod +x ./dotnet-install.sh
 popd
 
 # Now we can publish (since we've installed .NET in this environment)
-echo "DOTNET DEBUG"
-which dotnet
-dotnet --version
-echo "--------------"
-
 /opt/buildhome/.dotnet/dotnet publish -c Release -o release
