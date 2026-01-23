@@ -13,7 +13,6 @@ chmod +x ./dotnet-install.sh
 # Install .NET 9 (modify channel if needed in the future)
 ./dotnet-install.sh --channel 9.0
 
-# Return to project directory
 popd
 
 # Now we can publish (since we've installed .NET in this environment)
