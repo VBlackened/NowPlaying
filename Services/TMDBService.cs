@@ -113,7 +113,7 @@ namespace NowPlaying.Services
 
             movie.BackdropPath = string.IsNullOrEmpty(movie.BackdropPath)
                 ? "/images/mw1920_backdrop.jpg"
-                : $"{imageBaseUrl}{movie.PosterPath}";
+                : $"{imageBaseUrl}{movie.BackdropPath}";
 
             return movie;
         }
