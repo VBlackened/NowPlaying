@@ -15,7 +15,7 @@ namespace NowPlaying.Services
         public TMDBService(HttpClient http, IConfiguration config)
         {
             _http = http;
-            string? tmdbKey = config["TmdbAccesKey"];
+            string? tmdbKey = config["TmdbAccessKey"];
 
             if (!string.IsNullOrEmpty(tmdbKey))
             {
@@ -30,6 +30,7 @@ namespace NowPlaying.Services
         }
 
         private readonly string imageBaseUrl = "https://image.tmdb.org/t/p/w500";
+        private readonly string backdropBaseUrl = "https://image.tmdb.org/t/p/w1280";
 
         public async Task<MovieListResponse> GetNowPlayingMovies()
         {
@@ -113,7 +114,7 @@ namespace NowPlaying.Services
 
             movie.BackdropPath = string.IsNullOrEmpty(movie.BackdropPath)
                 ? "/images/mw1920_backdrop.jpg"
-                : $"{imageBaseUrl}{movie.BackdropPath}";
+                : $"{backdropBaseUrl}{movie.BackdropPath}";
 
             return movie;
         }

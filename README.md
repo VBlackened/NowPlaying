@@ -58,7 +58,7 @@ Browser (Blazor WASM)
 A few design decisions worth pointing out:
 
 - **The API key never ships to production.** In the deployed app, `TMDBService` calls `/TMDB/*`. A Netlify Edge Function ([`netlify/edge-functions/TMDB.js`](netlify/edge-functions/TMDB.js)) adds the `Authorization` header on the server and forwards the request to TMDB. Because a WebAssembly app is fully visible to the user, this is the reason for the proxy.
-- **One service picks its mode from configuration.** If `TmdbAccesKey` is present in the app configuration, the service talks to TMDB directly (local development). Otherwise it uses the proxy route (production).
+- **One service picks its mode from configuration.** If `TmdbAccessKey` is present in the app configuration, the service talks to TMDB directly (local development). Otherwise it uses the proxy route (production).
 - **Dependency injection.** `TMDBService` and `FavoritesService` are registered as scoped services in [`Program.cs`](Program.cs) and injected into the pages and components that need them.
 - **Typed models.** API responses are deserialized into C# models with a `snake_case` naming policy, so the models stay idiomatic C#.
 - **Reusable components.** `MovieCard` is shared by the Now Playing, Popular, Search and Favorites pages. `ActorSwiper` has its own scoped CSS and an isolated JavaScript module.
@@ -89,7 +89,7 @@ You need the [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) and 
 ```bash
 git clone https://github.com/VBlackened/NowPlaying.git
 cd NowPlaying
-# put {"TmdbAccesKey": "<your token>"} in wwwroot/appsettings.Development.json (git-ignored)
+# put {"TmdbAccessKey": "<your token>"} in wwwroot/appsettings.Development.json (git-ignored)
 dotnet run
 ```
 

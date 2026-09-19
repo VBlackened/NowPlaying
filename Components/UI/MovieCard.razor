@@ -1,25 +1,28 @@
 ﻿@inject FavoritesService FavoritesService
 
-<div class="movieCard card h-100">
-    <img src="@Movie.PosterPath" alt="Movie Poster" class="card-img-top" />
-    <div class="card-body border-top">
-        <div class="card-title fw-bold lh-1">
-            @Movie.Title
+@if (Movie is not null)
+{
+    <div class="movieCard card h-100">
+        <img src="@Movie.PosterPath" alt="Movie Poster" class="card-img-top" />
+        <div class="card-body border-top">
+            <div class="card-title fw-bold lh-1">
+                @Movie.Title    
+            </div>
+            <div class="card-text lh-1 fst-italic">
+                @{
+                    var parsed = DateTime.TryParse(Movie.ReleaseDate, out var releaseDate);
+                }
+                Release Date: @(parsed ? releaseDate.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture) : "Unknown")
+            </div>
         </div>
-        <div class="card-text lh-1 fst-italic">
-            @{
-                var parsed = DateTime.TryParse(Movie.ReleaseDate, out var releaseDate);
-            }
-            Release Date: @(parsed ? releaseDate.ToString("MMMM dd, yyyy") : "Unknown")
+        <div class="movieCardFooter card-footer d-flex justify-content-between">
+            <button class="btn btn-outline-primary" @onclick="HandleToggleFavorite">
+                @(isFavorite ? "Remove Fav" : "Add Fav")
+            </button>
+            <a href="/movie/@Movie.Id" class="btn btn-primary">More Info</a>
         </div>
     </div>
-    <div class="movieCardFooter card-footer d-flex justify-content-between">
-        <button class="btn btn-outline-primary" @onclick="HandleToggleFavorite">
-            @(isFavorite ? "Remove Fav" : "Add Fav")
-        </button>
-        <a href="/movie/@Movie.Id" class="btn btn-primary">More Info</a>
-    </div>
-</div>
+}
 
 @code {
     [Parameter, EditorRequired] public Movie? Movie { get; set; }
